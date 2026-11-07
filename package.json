@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "testar-ia": "node scripts/testar-ia.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.6.0",

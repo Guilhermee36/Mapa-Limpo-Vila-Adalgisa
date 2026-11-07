@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const destaques = [
-  { v: "80%", t: "presenciaram acúmulo de lixo no último ano", cls: "laranja" },
+  { v: "78,8%", t: "presenciaram infrações ou poluição no bairro no último ano", cls: "laranja" },
   { v: "97%", t: "avaliam a fiscalização como regular, ruim ou péssima" },
   { v: "48,5%", t: "não sabem a quem denunciar crimes ambientais", cls: "amarelo" },
   { v: "0%", t: "já participaram de mutirões ou projetos ambientais" },
@@ -10,13 +10,15 @@ const destaques = [
 const habitos = [
   { t: "Economizam água e energia", v: 81.8 },
   { t: "Separam lixo reciclável", v: 51.5 },
-  { t: "Têm interesse em iniciativas de preservação (mais de 60%)", v: 60 },
+  { t: "Sabem a quem recorrer para denunciar crimes ambientais", v: 51.5 },
 ];
 
 const urgentes = [
-  { t: "Punição / multas", v: 33.3 },
-  { t: "Coleta seletiva", v: 24.2 },
-  { t: "Criação de áreas verdes", v: 2.9 },
+  { t: "Maior fiscalização e aplicação de multas", v: 33.3 },
+  { t: "Aumento de lixeiras e coleta seletiva eficiente", v: 24.2 },
+  { t: "Projetos de educação ambiental nas escolas e bairros", v: 24.2 },
+  { t: "Melhora no saneamento básico e tratamento de esgoto", v: 15.2 },
+  { t: "Criação e manutenção de praças e áreas verdes", v: 3 },
 ];
 
 function Barras({ itens, cor }) {
@@ -35,7 +37,8 @@ export default function Diagnostico() {
       <h1 style={{ margin: "6px 0 10px" }}>O que a comunidade respondeu</h1>
       <p className="suave" style={{ maxWidth: 680 }}>
         Questionário digital, voluntário e anônimo, aplicado pelo grupo de Direito da UCS na Vila Adalgisa (Google Forms,
-        de 08/10/2026 a 15/10/2026) e analisado em parceria com o grupo de Ciência da Computação.
+        de 08/10/2026 a 15/10/2026) e analisado em parceria com o grupo de Ciência da Computação. Foram <strong>33 respostas</strong>:
+        uma amostra pequena e voluntária, que indica tendências e não representa todo o bairro.
       </p>
 
       <div className="kpis">
