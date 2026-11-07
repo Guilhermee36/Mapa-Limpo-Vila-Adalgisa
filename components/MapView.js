@@ -45,7 +45,7 @@ export default function MapView({ ocorrencias = [], ecopontos = [], selId, onSel
           key={o.id}
           center={[o.lat, o.lng]}
           radius={o.id === selId ? 15 : 10}
-          pathOptions={{ color: "#14110f", weight: o.id === selId ? 4 : 3, fillColor: STATUS_COR[o.status] || "#ff5a1f", fillOpacity: 1 }}
+          pathOptions={{ color: "#0e3a29", weight: o.id === selId ? 4 : 3, fillColor: STATUS_COR[o.status] || "#178a4c", fillOpacity: 1 }}
           eventHandlers={{ click: () => onSelect && onSelect(o.id) }}
         />
       ))}
@@ -60,7 +60,7 @@ export default function MapView({ ocorrencias = [], ecopontos = [], selId, onSel
       {eu && <Marker position={eu} icon={iconeEu} />}
       {escolhido && (
         <CircleMarker center={escolhido} radius={13}
-          pathOptions={{ color: "#14110f", weight: 4, fillColor: "#ff5a1f", fillOpacity: 1 }} />
+          pathOptions={{ color: "#0e3a29", weight: 4, fillColor: "#178a4c", fillOpacity: 1 }} />
       )}
     </MapContainer>
   );

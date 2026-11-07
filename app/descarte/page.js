@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import Mapa from "@/components/Mapa";
 import Icon from "@/components/Icon";
+import { chamarIA } from "@/lib/ia";
 import { ecopontos, canais, servicos, guia, regrasEcoponto } from "@/data/ecopontos";
 
 function dist(a, b) {
@@ -19,6 +20,19 @@ export default function Descarte() {
   const [erro, setErro] = useState("");
   const [alvo, setAlvo] = useState(null);
   const [eu, setEu] = useState(null);
+  const [duvida, setDuvida] = useState("");
+  const [resp, setResp] = useState(null);
+  const [pensando, setPensando] = useState(false);
+
+  async function perguntar(e) {
+    e.preventDefault();
+    if (duvida.trim().length < 3) return;
+    setPensando(true);
+    setResp(null);
+    const r = await chamarIA("duvida", duvida);
+    setPensando(false);
+    setResp(r.ok ? { texto: r.resposta } : { erro: r.msg });
+  }
 
   const resultado = useMemo(() => {
     const q = semAcento(busca.trim());
@@ -67,6 +81,22 @@ export default function Descarte() {
               ))}
             </div>
           )}
+          <div className="cartao" style={{ marginTop: 24, background: "var(--amarelo)" }}>
+            <h3><Icon n="spark" size={18} /> Não achou? Pergunte à IA</h3>
+            <form onSubmit={perguntar} style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <input value={duvida} onChange={(e) => setDuvida(e.target.value)} maxLength={300}
+                placeholder="Ex.: posso levar um sofá ao ecoponto aos domingos?" aria-label="Sua dúvida" style={{ flex: "1 1 260px" }} />
+              <button className="btn" disabled={pensando || duvida.trim().length < 3}>{pensando ? "Pensando…" : "Perguntar"}</button>
+            </form>
+            {resp?.texto && (
+              <div style={{ marginTop: 12 }}>
+                <p style={{ marginBottom: 6 }}>{resp.texto}</p>
+                <small className="suave">Resposta gerada por IA com base nas informações desta página. Na dúvida, ligue 156.</small>
+              </div>
+            )}
+            {resp?.erro && <div className="aviso erro" style={{ marginTop: 12 }}>{resp.erro}</div>}
+          </div>
+
           <h2 style={{ marginTop: 32 }}>Serviços da Prefeitura</h2>
           <div className="grade">
             {servicos.map((s) => (

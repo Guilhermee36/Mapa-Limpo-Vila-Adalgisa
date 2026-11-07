@@ -4,6 +4,7 @@ import Link from "next/link";
 import Mapa from "@/components/Mapa";
 import Icon from "@/components/Icon";
 import { supabase, TIPOS } from "@/lib/supabase";
+import { chamarIA } from "@/lib/ia";
 
 export default function Registrar() {
   const [pos, setPos] = useState(null);
@@ -15,6 +16,21 @@ export default function Registrar() {
   const [msg, setMsg] = useState(null);
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
+  const [sugerindo, setSugerindo] = useState(false);
+  const [iaMsg, setIaMsg] = useState("");
+
+  async function sugerirTipo() {
+    setIaMsg("");
+    setSugerindo(true);
+    const r = await chamarIA("tipo", descricao);
+    setSugerindo(false);
+    if (r.ok) {
+      setTipo(r.tipo);
+      setIaMsg(`A IA sugeriu "${TIPOS[r.tipo]}". Confira no passo 2 antes de enviar.`);
+    } else {
+      setIaMsg(r.msg);
+    }
+  }
 
   function usarGps() {
     if (!navigator.geolocation) return setMsg("Seu navegador não permite localização.");
@@ -129,6 +145,11 @@ export default function Registrar() {
             <label htmlFor="desc">Detalhes (opcional)</label>
             <textarea id="desc" rows={3} maxLength={500} value={descricao} onChange={(e) => setDescricao(e.target.value)}
               placeholder="Ex.: sacos de lixo na calçada em frente ao nº 120" />
+            <button type="button" className="btn peq papel" style={{ marginTop: 8 }}
+              disabled={sugerindo || descricao.trim().length < 5} onClick={sugerirTipo}>
+              <Icon n="spark" size={16} /> {sugerindo ? "Pensando…" : "Sugerir o tipo com IA"}
+            </button>
+            {iaMsg && <small className="suave" style={{ display: "block", marginTop: 6 }}>{iaMsg}</small>}
             <label htmlFor="foto" style={{ marginTop: 12 }}>Foto (opcional)</label>
             <input id="foto" type="file" accept="image/jpeg,image/png,image/webp" onChange={(e) => setFoto(e.target.files[0] || null)} />
           </div>

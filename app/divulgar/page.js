@@ -9,7 +9,7 @@ export default function Divulgar() {
 
   useEffect(() => { setUrl(window.location.origin); }, []);
   useEffect(() => {
-    if (url && canvas.current) QRCode.toCanvas(canvas.current, url, { width: 520, margin: 1, color: { dark: "#14110f", light: "#ffffff" } });
+    if (url && canvas.current) QRCode.toCanvas(canvas.current, url, { width: 520, margin: 1, color: { dark: "#0e3a29", light: "#ffffff" } });
   }, [url]);
 
   return (
