@@ -94,7 +94,7 @@ export default function Descarte() {
                 <small className="suave">Resposta gerada por IA com base nas informações desta página. Na dúvida, ligue 156.</small>
               </div>
             )}
-            {resp?.erro && <div className="aviso erro" style={{ marginTop: 12 }}>{resp.erro}</div>}
+            {resp?.erro && <div className="aviso" style={{ marginTop: 12 }}>{resp.erro}</div>}
           </div>
 
           <h2 style={{ marginTop: 32 }}>Serviços da Prefeitura</h2>
