@@ -72,6 +72,9 @@ export default function Inicio() {
             <div className="painel-topo">
               <h1>Lixo na rua? Mostre no mapa.</h1>
               <p>Registro anônimo. Toque num ponto do mapa ou da lista para ver os detalhes.</p>
+              <div className="aviso" style={{ marginTop: 8, fontSize: ".78rem", padding: "6px 10px" }}>
+                <strong>Legenda:</strong> as ocorrências e suas datas são fictícias e foram inseridas para demonstrar o funcionamento do sistema.
+              </div>
             </div>
             <div className="contadores">
               <div><b>{carregando ? "–" : dados?.length ?? 0}</b><span>No mapa</span></div>
